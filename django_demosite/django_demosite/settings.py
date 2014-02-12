@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admin',
     'article',
 )
 
@@ -52,8 +53,11 @@ ROOT_URLCONF = 'django_demosite.urls'
 
 WSGI_APPLICATION = 'django_demosite.wsgi.application'
 
+STATICFILES_DIRS = ("/Users/andrewhaberman/desktop/django-drew/django_demosite/css", )
+
 TEMPLATE_DIRS = (
-    '/Users/andrewhaberman/django-drew/django_demosite/templates',
+    '/Users/andrewhaberman/desktop/django-drew/django_demosite/templates',
+    '/Users/andrewhaberman/desktop/django-drew/django_demosite/article/templates',
 )
 
 # Database
@@ -62,7 +66,7 @@ TEMPLATE_DIRS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/Users/andrewhaberman/django-drew/django_demosite/storage.db',
+        'NAME': '/Users/andrewhaberman/desktop/django-drew/django_demosite/storage.db',
     }
 }
 
