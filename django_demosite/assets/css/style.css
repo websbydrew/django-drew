@@ -21,3 +21,8 @@ body {
 	border: 1px solid #f00;
 	padding: 10px;
 }
+
+#footer {
+	float: left;
+	width: 600px;
+}

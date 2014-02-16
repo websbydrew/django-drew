@@ -1,36 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>{% block title %}My Base Template{% endblock %}</title>
 
-	<link rel="stylesheet" type="text/css" href="../css/style.css">
-<style>
-body {
-	text-align: center;
-}
-
-#page {
-	width: 960px;
-	text-align: left;
-	margin: 10px auto 20px auto;
-	background color: #0c0c0c;
-}
-
-#sidebar {
-	float: left;
-	width: 200px;
-	border: 1px solid #000;
-}
-
-#content {
-	float: left;
-	width: 600px;
-	border: 1px solid #f00;
-	padding: 10px;
-}
-</style>
-	
-</style>
+	<link rel="stylesheet" type="text/css" href="{% static "assets/css/style.css" %}">
 </head>
 
 <body>
@@ -49,6 +23,14 @@ body {
 		{% block content %}This is the content area{% endblock %}
 	</div>
 	
+	
+		{% block footer %}
+		<div id="footer">
+			<p class="footer">© 2013 Webs by Drew, All Rights Reserved.</p>
+		</div>
+		{% endblock %}
+	
+
 	</div>
 
 </body>
