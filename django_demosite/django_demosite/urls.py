@@ -21,4 +21,8 @@ urlpatterns = patterns('',
     url(r'^accounts/logout/$', 'django_demosite.views.logout'),
     url(r'^accounts/loggedin/$', 'django_demosite.views.loggedin'),
     url(r'^accounts/invalid/$', 'django_demosite.views.invalid_login'),
+
+    # registration
+    url(r'^accounts/register/$', 'django_demosite.views.register_user'),
+    url(r'^accounts/register_success/$', 'django_demosite.views.register_success'),
 )
