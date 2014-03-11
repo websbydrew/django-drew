@@ -10,6 +10,10 @@ from forms import ArticleForm
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
 
+import logging
+
+logr = logging.getLogger(__name__)
+
 # Create your views here.
 
 
@@ -24,10 +28,15 @@ def articles(request):
 	if 'lang' in request.session:
 		session_language = request.session['lang']
 
-	return render_to_response('articles.html',
-		{'articles': Article.objects.all(),
-		'language': language,
-		'session_language' : session_language})
+	args = {}
+	args.update(csrf(request))
+
+	args['articles'] = Article.objects.all()
+	args['language'] = language
+	args['session_language'] = session_language
+
+	return render_to_response('articles.html', args)
+
 
 def article(request, article_id=1):
 	return render_to_response('article.html',
@@ -44,7 +53,7 @@ def language(request, language='en'):
 
 def create (request):
 	if request.POST:
-		form = ArticleForm(request.POST)
+		form = ArticleForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
 
@@ -59,6 +68,25 @@ def create (request):
 
 	return render_to_response('create_article.html', args)
 
+def like_article(request, article_id):
+	if article_id:
+		a = Article.objects.get(id=article_id)
+		count = a.likes
+		count += 1
+		a.likes = count
+		a.save()
+
+	return HttpResponseRedirect('/articles/get/%s' % article_id)
+
+def search_titles (request):
+	if request.method == "POST":
+		search_text = request.POST['search_text']
+	else: 
+		search_text = ''
+
+	articles = Article.objects.filter(title__contains=search_text)
+
+	return render_to_response('ajax_search.html', {'articles' : articles})
 
 # def hello(request):
 # 	name = "Mike"

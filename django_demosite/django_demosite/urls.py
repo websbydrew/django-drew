@@ -4,6 +4,9 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from django_demosite.forms import ContactForm1, ContactForm2, ContactForm3
+from django_demosite.views import ContactWizard
+
 urlpatterns = patterns('',
 	(r'^articles/', include('article.urls')),
 	
@@ -25,4 +28,9 @@ urlpatterns = patterns('',
     # registration
     url(r'^accounts/register/$', 'django_demosite.views.register_user'),
     url(r'^accounts/register_success/$', 'django_demosite.views.register_success'),
+
+    # contact forms
+    url(r'^contact/$', ContactWizard.as_view([ContactForm1, ContactForm2, ContactForm3])),
+
+
 )
